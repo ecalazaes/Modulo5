@@ -16,7 +16,6 @@ function buscarAlunoPorId(id) {
     return list.filter((item) => item.id == id)
 }
 
-
 // Criando uma rota padrão ou raiz.
 app.get('/', (req, res) => {
     res.status(200).send('Aula sasasasa!')
@@ -27,17 +26,16 @@ app.get('/listas', (req, res) => {
     res.status(200).send(list)
 })
 
-// Inserir
-app.post('/listas', (req, res) => {
-    list.push(req.body)
-    res.status(201).send("Aluno cadastrado com sucesso!")
-})
-
 // Buscar por Id
 app.get('/listas/:id', (req, res) => {
     res.json(buscarAlunoPorId(req.params.id));
 })
 
+// Inserir
+app.post('/listas', (req, res) => {
+    list.push(req.body)
+    res.status(201).send("Aluno cadastrado com sucesso!")
+})
 
 // Expor o objeto para outros módulos
 export default app
