@@ -1,16 +1,10 @@
 import express from 'express'
+import conexao from "../infra/conexao.js";
+
 const app = express()
 
 // Indicar para o express usar o boby com json
 app.use(express.json());
-
-// mock
-const list = [
-    {id: 1, Nome: "Erick", Grupo: "A"},
-    {id: 2, Nome: "Daniele", Grupo: "A"},
-    {id: 3, Nome: "Ronaldo", Grupo: "A"},
-    {id: 4, Nome: "Calazães", Grupo: "A"}
-]
 
 function buscarAlunoPorId(id) {
     return list.filter((item) => item.id == id)
@@ -23,7 +17,16 @@ app.get('/', (req, res) => {
 
 // Buscar todos
 app.get('/listas', (req, res) => {
-    res.status(200).send(list)
+
+    const sql = 'SELECT * FROM alunos';
+
+    conexao.query(sql, (error, resultado) => {
+        if (error) {
+            res.status(404).json({ error: 'Erro ao buscar alunos' });
+        } else {
+            res.status(200).send(resultado);
+        }
+    })
 })
 
 // Buscar por Id

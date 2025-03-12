@@ -10,4 +10,13 @@ const conexao = mysql.createConnection({
 
 })
 
+// Estabelecer a conexão com o banco
+conexao.connect((error) => {
+    if (error) {
+        console.log(error)
+    } else {
+        console.log("Conexão realizada com sucesso")
+    }
+})
+
 export default conexao
