@@ -1,0 +1,42 @@
+Revisão de Briefing
+Unificação do briefing
+Documento de análise de requisitos (funcional, não funcional e inverso)
+Análise da identidade visual da empresa
+Documento de mapeamento dos requisitos não funcionais
+Documento de lista de componentes  (angular, react native e Java) utilizados nos sistemas
+Persona
+Briefing
+Jornada do Usuário
+Mapa de Navegação geral do sistema
+Wireframe baixa fidelidade por funcionalidade web
+Wireframe alta fildelidade por funcionalidade web
+Wireframe baixa fidelidade por funcionalidade mobile
+Wireframe alta fildelidade por funcionalidade mobile
+Guia de estilos para projeto angular customizado para todos os grupos
+Guia de estilos mobile customizado para todos os grupos
+Diagrama de casos de uso
+Especificação de casos de uso
+Diagrama de atividades por caso de uso
+Matriz de rastreabilidade de funcionalidades (matriz de criticidade de interdependências entre funcionalidades)
+Diagrama de Classe do caso de uso/ou total do sistema
+Diagrama de sequência por caso de uso
+Diagrama de estado das classe mais importantes do sistema
+Script de banco de dados atualizado constantemente do microserviço
+Cronograma no project de cada sprint/estimativa geral de planejamento de todo o projeto
+Integração front-end/back-end de cada caso de uso
+Criação de plano de testes unitários de cada componente e classes do sistema
+Implementação dos testes unitários dos componentes e classes do sistema
+Definição/atualização de tabelas e atributos do banco de dados
+Criação e configuração dos projetos spring com microserviços
+Criação do API Gateway
+Criação do script jenkins de cada projeto de microserviço
+Criação do script docker file de cada projeto de microserviço
+Merge da branch em desenvolvimento do grupo para a branch master
+Documento de validação de implementação de funcionalidade (o que foi validado e como na página de homologação no academico2)
+Documento de avaliação de equipe do projeto x sprint do módulo 5
+Definição e verificação do padrão do uso de bibliotecas em todos os projetos (listar e atualizar quais bibliotecas estão sendo utilizadas em cada projeto)
+Programação das funcionalidades em Java Springboot
+Programação das funcionalidades em Angular (responsivo)
+Programação das funcionalidades em React Native
+Definição acompanhamento da padronização web/mobile
+Documentação do sistema
