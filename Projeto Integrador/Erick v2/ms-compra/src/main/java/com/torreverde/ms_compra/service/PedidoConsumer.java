@@ -25,9 +25,16 @@ public class PedidoConsumer {
 
         if (pedidoOpt.isPresent()) {
             Pedido pedido = pedidoOpt.get();
-            pedido.setStatus("PAGO");
+
+            if ("APROVADO".equals(pagamentoDTO.getStatus())) {
+                pedido.setStatus("PAGO");
+                System.out.println("Pedido atualizado para PAGO: " + pedido.getId());
+            } else {
+                pedido.setStatus("CANCELADO");
+                System.out.println("Pedido cancelado devido a pagamento recusado: " + pedido.getId());
+            }
+
             pedidoRepository.save(pedido);
-            System.out.println("Pedido atualizado para PAGO: " + pedido.getId());
         } else {
             System.out.println("Pedido não encontrado: " + pagamentoDTO.getPedidoId());
         }

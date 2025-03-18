@@ -7,6 +7,7 @@ import com.torreverde.ms_pagamento.repository.PagamentoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Service
 public class PagamentoService {
@@ -20,11 +21,14 @@ public class PagamentoService {
     }
 
     public Pagamento processarPagamento(PedidoDTO pedidoDTO) {
+        // Simulando a aprovação ou recusa do pagamento (50% de chance de recusa)
+        String statusPagamento = new Random().nextBoolean() ? "APROVADO" : "RECUSADO";
+
         Pagamento pagamento = Pagamento.builder()
                 .pedidoId(pedidoDTO.getId())
                 .usuarioId(pedidoDTO.getUsuarioId())
                 .valor(pedidoDTO.getTotal())
-                .status("APROVADO") // Simulação de sucesso
+                .status(statusPagamento)
                 .dataCriacao(LocalDateTime.now())
                 .build();
 
