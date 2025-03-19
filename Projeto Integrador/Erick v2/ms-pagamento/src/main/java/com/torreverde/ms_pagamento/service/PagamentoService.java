@@ -87,7 +87,7 @@ public class PagamentoService {
 
         Pagamento pagamento = Pagamento.builder()
                 .nomeDoador(doacaoDTO.getNomeDoador()) // Armazena o nome do doador
-                .documento(doacaoDTO.getDocumento())  // Armazena CPF ou CNPJ
+                .documentoDoador(doacaoDTO.getDocumentoDoador())  // Armazena CPF ou CNPJ
                 .valor(doacaoDTO.getValor())
                 .status(statusPagamento)
                 .doacao(true)
@@ -99,7 +99,7 @@ public class PagamentoService {
         // Enviar evento para RabbitMQ
         PagamentoDTO pagamentoDTO = PagamentoDTO.builder()
                 .nomeDoador(pagamento.getNomeDoador())
-                .documento(pagamento.getDocumento())
+                .documento(pagamento.getDocumentoDoador())
                 .valor(pagamento.getValor())
                 .status(pagamento.getStatus())
                 .doacao(pagamento.getDoacao())

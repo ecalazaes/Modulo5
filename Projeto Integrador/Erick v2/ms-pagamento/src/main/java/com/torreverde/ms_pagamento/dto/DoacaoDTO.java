@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class DoacaoDTO {
 
     private String nomeDoador;
-    private String documento; // CPF ou CNPJ
+    private String documentoDoador; // CPF ou CNPJ
     private Integer valor;
 }

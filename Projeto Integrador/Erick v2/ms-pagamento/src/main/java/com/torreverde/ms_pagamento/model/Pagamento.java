@@ -18,22 +18,30 @@ public class Pagamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pagamento_id")
     private Long id;
 
+    @Column(name = "pagamento_pedido_id")
     private Long pedidoId;
 
+    @Column(name = "pagamento_usuario_id")
     private Long usuarioId;
 
+    @Column(name = "pagamento_nome_doador", nullable = false)
     private String nomeDoador;
 
-    private String documento; // CPF ou CNPJ
+    @Column(name = "pagamento_documento_doador", nullable = false, length = 14)
+    private String documentoDoador; // CPF ou CNPJ
 
+    @Column(name = "pagamento_valor", nullable = false)
     private Integer valor;
 
+    @Column(name = "pagamento_status", nullable = false)
     private String status; // "APROVADO" ou "RECUSADO"
 
+    @Column(name = "pagamento_data", nullable = false)
     private LocalDateTime dataCriacao;
 
-    @Column(nullable = false)
+    @Column(name = "pagamento_doacao", nullable = false)
     private Boolean doacao;  // Novo campo para indicar se o pagamento é de uma doação
 }
