@@ -24,6 +24,10 @@ public class Pagamento {
 
     private Long usuarioId;
 
+    private String nomeDoador;
+
+    private String documento; // CPF ou CNPJ
+
     private Integer valor;
 
     private String status; // "APROVADO" ou "RECUSADO"

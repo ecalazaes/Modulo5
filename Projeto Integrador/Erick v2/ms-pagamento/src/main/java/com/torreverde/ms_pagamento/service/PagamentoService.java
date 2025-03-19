@@ -1,5 +1,6 @@
 package com.torreverde.ms_pagamento.service;
 
+import com.torreverde.ms_pagamento.dto.DoacaoDTO;
 import com.torreverde.ms_pagamento.dto.PagamentoDTO;
 import com.torreverde.ms_pagamento.dto.PedidoDTO;
 import com.torreverde.ms_pagamento.dto.PedidoItemDTO;
@@ -70,6 +71,35 @@ public class PagamentoService {
         PagamentoDTO pagamentoDTO = PagamentoDTO.builder()
                 .pedidoId(pagamento.getPedidoId())
                 .usuarioId(pagamento.getUsuarioId())
+                .valor(pagamento.getValor())
+                .status(pagamento.getStatus())
+                .doacao(pagamento.getDoacao())
+                .dataCriacao(pagamento.getDataCriacao())
+                .build();
+
+        pagamentoPublisher.enviarPagamentoConcluido(pagamentoDTO);
+
+        return pagamento;
+    }
+
+    public Pagamento processarDoacao(DoacaoDTO doacaoDTO) {
+        String statusPagamento = new Random().nextBoolean() ? "APROVADO" : "RECUSADO";
+
+        Pagamento pagamento = Pagamento.builder()
+                .nomeDoador(doacaoDTO.getNomeDoador()) // Armazena o nome do doador
+                .documento(doacaoDTO.getDocumento())  // Armazena CPF ou CNPJ
+                .valor(doacaoDTO.getValor())
+                .status(statusPagamento)
+                .doacao(true)
+                .dataCriacao(LocalDateTime.now())
+                .build();
+
+        pagamento = pagamentoRepository.save(pagamento);
+
+        // Enviar evento para RabbitMQ
+        PagamentoDTO pagamentoDTO = PagamentoDTO.builder()
+                .nomeDoador(pagamento.getNomeDoador())
+                .documento(pagamento.getDocumento())
                 .valor(pagamento.getValor())
                 .status(pagamento.getStatus())
                 .doacao(pagamento.getDoacao())
