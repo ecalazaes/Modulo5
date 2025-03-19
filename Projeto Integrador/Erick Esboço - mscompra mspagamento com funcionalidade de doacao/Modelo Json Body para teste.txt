@@ -1,0 +1,28 @@
+- testar Doação em um pedido
+{
+    "usuarioId": 1,
+    "total": 50,
+    "itensPedido": [
+        {
+            "nome": "Camisa Preta",
+            "preco": 40.00,
+            "quantidade": 1,
+            "doacao": false
+        },
+        {
+            "nome": "Doação para ONG",
+            "preco": 10.00,
+            "quantidade": 1,
+            "doacao": true
+        }
+    ]
+}
+
+- Testar Doação Direta
+{
+  "nomeDoador": "Erick Calazães",
+  "documentoDoador": "14019044759",
+  "valor": 150
+}
+
+docker run -d --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:management
