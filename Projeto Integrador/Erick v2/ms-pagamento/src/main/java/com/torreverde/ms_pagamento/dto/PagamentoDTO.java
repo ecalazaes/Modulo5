@@ -14,9 +14,16 @@ import java.time.LocalDateTime;
 @Builder
 public class PagamentoDTO implements Serializable {
 
+//    private Long pedidoId;
+//    private Long usuarioId;
+//    private Integer valor;
+//    private String status;
+//    private LocalDateTime dataCriacao;
+
     private Long pedidoId;
     private Long usuarioId;
     private Integer valor;
     private String status;
+    private Boolean doacao;  // Indica se o pagamento contém uma doação
     private LocalDateTime dataCriacao;
 }

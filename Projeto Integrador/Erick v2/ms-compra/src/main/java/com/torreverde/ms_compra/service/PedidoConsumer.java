@@ -17,26 +17,47 @@ public class PedidoConsumer {
         this.pedidoRepository = pedidoRepository;
     }
 
-    @RabbitListener(queues = "pagamento.concluido")
-    public void receberPagamentoConcluido(PagamentoDTO pagamentoDTO) {
-        System.out.println("Recebendo pagamento concluído para o pedido: " + pagamentoDTO.getPedidoId());
+//    @RabbitListener(queues = "pagamento.concluido")
+//    public void receberPagamentoConcluido(PagamentoDTO pagamentoDTO) {
+//        System.out.println("Recebendo pagamento concluído para o pedido: " + pagamentoDTO.getPedidoId());
+//
+//        Optional<Pedido> pedidoOpt = pedidoRepository.findById(pagamentoDTO.getPedidoId());
+//
+//        if (pedidoOpt.isPresent()) {
+//            Pedido pedido = pedidoOpt.get();
+//
+//            if ("APROVADO".equals(pagamentoDTO.getStatus())) {
+//                pedido.setStatus("PAGO");
+//                System.out.println("Pedido atualizado para PAGO: " + pedido.getId());
+//            } else {
+//                pedido.setStatus("CANCELADO");
+//                System.out.println("Pedido cancelado devido a pagamento recusado: " + pedido.getId());
+//            }
+//
+//            pedidoRepository.save(pedido);
+//        } else {
+//            System.out.println("Pedido não encontrado: " + pagamentoDTO.getPedidoId());
+//        }
+//    }
+@RabbitListener(queues = "pagamento.concluido")
+public void receberPagamentoConcluido(PagamentoDTO pagamentoDTO) {
+    Optional<Pedido> pedidoOpt = pedidoRepository.findById(pagamentoDTO.getPedidoId());
 
-        Optional<Pedido> pedidoOpt = pedidoRepository.findById(pagamentoDTO.getPedidoId());
+    if (pedidoOpt.isPresent()) {
+        Pedido pedido = pedidoOpt.get();
 
-        if (pedidoOpt.isPresent()) {
-            Pedido pedido = pedidoOpt.get();
+        if ("APROVADO".equals(pagamentoDTO.getStatus())) {
+            pedido.setStatus("PAGO");
 
-            if ("APROVADO".equals(pagamentoDTO.getStatus())) {
-                pedido.setStatus("PAGO");
-                System.out.println("Pedido atualizado para PAGO: " + pedido.getId());
-            } else {
-                pedido.setStatus("CANCELADO");
-                System.out.println("Pedido cancelado devido a pagamento recusado: " + pedido.getId());
+            if (pagamentoDTO.getDoacao()) {
+                System.out.println("Obrigado pela doação! 💖");
             }
-
-            pedidoRepository.save(pedido);
         } else {
-            System.out.println("Pedido não encontrado: " + pagamentoDTO.getPedidoId());
+            pedido.setStatus("CANCELADO");
         }
+
+        pedidoRepository.save(pedido);
     }
+}
+
 }

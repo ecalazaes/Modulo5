@@ -29,4 +29,7 @@ public class Pagamento {
     private String status; // "APROVADO" ou "RECUSADO"
 
     private LocalDateTime dataCriacao;
+
+    @Column(nullable = false)
+    private Boolean doacao;  // Novo campo para indicar se o pagamento é de uma doação
 }
