@@ -22,35 +22,6 @@ public class PagamentoService {
         this.pagamentoPublisher = pagamentoPublisher;
     }
 
-//    public Pagamento processarPagamento(PedidoDTO pedidoDTO) {
-//        // Simulando a aprovação ou recusa do pagamento (50% de chance de recusa)
-//        String statusPagamento = new Random().nextBoolean() ? "APROVADO" : "RECUSADO";
-//
-//        Pagamento pagamento = Pagamento.builder()
-//                .pedidoId(pedidoDTO.getId())
-//                .usuarioId(pedidoDTO.getUsuarioId())
-//                .valor(pedidoDTO.getTotal())
-//                .status(statusPagamento)
-//                .dataCriacao(LocalDateTime.now())
-//                .build();
-//
-//        pagamentoRepository.save(pagamento);
-//
-//        // Criar DTO para enviar ao RabbitMQ
-//        PagamentoDTO pagamentoDTO = PagamentoDTO.builder()
-//                .pedidoId(pagamento.getPedidoId())
-//                .usuarioId(pagamento.getUsuarioId())
-//                .valor(pagamento.getValor())
-//                .status(pagamento.getStatus())
-//                .dataCriacao(pagamento.getDataCriacao())
-//                .build();
-//
-//        // Publica evento no RabbitMQ
-//        pagamentoPublisher.enviarPagamentoConcluido(pagamentoDTO);
-//
-//        return pagamento;
-//    }
-
     public Pagamento processarPagamento(PedidoDTO pedidoDTO) {
         boolean contemDoacao = pedidoDTO.getItens().stream().anyMatch(PedidoItemDTO::getDoacao);
 
