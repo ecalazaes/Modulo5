@@ -19,12 +19,6 @@ public class PedidoController {
         this.pedidoService = pedidoService;
     }
 
-//    @PostMapping
-//    public ResponseEntity<Pedido> criarPedido(@RequestBody Pedido pedido) {
-//        Pedido novoPedido = pedidoService.criarPedido(pedido);
-//        return ResponseEntity.ok(novoPedido);
-//    }
-
     @PostMapping
     public ResponseEntity<Pedido> criarPedido(@RequestBody PedidoDTO pedidoDTO) {
         Pedido pedido = pedidoService.criarPedido(pedidoDTO);

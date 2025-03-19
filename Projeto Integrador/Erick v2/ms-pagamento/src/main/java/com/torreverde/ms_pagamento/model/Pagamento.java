@@ -39,7 +39,7 @@ public class Pagamento {
     @Column(name = "pagamento_status", nullable = false)
     private String status; // "APROVADO" ou "RECUSADO"
 
-    @Column(name = "pagamento_data", nullable = false)
+    @Column(name = "pagamento_data_criacao", nullable = false)
     private LocalDateTime dataCriacao;
 
     @Column(name = "pagamento_doacao", nullable = false)

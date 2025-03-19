@@ -24,26 +24,6 @@ public class PedidoService {
         this.pedidoPublisher = pedidoPublisher;
     }
 
-//    public Pedido criarPedido(Pedido pedido) {
-//        pedido.setStatus("PENDENTE");
-//        pedido.setDataCriacao(LocalDateTime.now());
-//        Pedido pedidoSalvo = pedidoRepository.save(pedido);
-//
-//        // Criar DTO para enviar ao RabbitMQ
-//        PedidoDTO pedidoDTO = PedidoDTO.builder()
-//                .id(pedidoSalvo.getId())
-//                .usuarioId(pedidoSalvo.getUsuarioId())
-//                .total(pedidoSalvo.getTotal())
-//                .status(pedidoSalvo.getStatus())
-//                .dataCriacao(pedidoSalvo.getDataCriacao())
-//                .build();
-//
-//        // Publica evento no RabbitMQ
-//        pedidoPublisher.enviarPedidoCriado(pedidoDTO);
-//
-//        return pedidoSalvo;
-//    }
-
     @Transactional
     public Pedido criarPedido(PedidoDTO pedidoDTO) {
         Pedido pedido = new Pedido();
@@ -54,7 +34,7 @@ public class PedidoService {
 
         pedido = pedidoRepository.save(pedido);
 
-        for (PedidoItemDTO itemDTO : pedidoDTO.getItens()) {
+        for (PedidoItemDTO itemDTO : pedidoDTO.getItensPedido()) {
             PedidoItem item = PedidoItem.builder()
                     .pedido(pedido)
                     .nome(itemDTO.getNome())
@@ -71,7 +51,7 @@ public class PedidoService {
                 .usuarioId(pedido.getUsuarioId())
                 .id(pedido.getId())
                 .total(pedido.getTotal())
-                .itens(pedidoDTO.getItens())
+                .itensPedido(pedidoDTO.getItensPedido())
                 .build();
 
         pedidoPublisher.enviarPedidoCriado(pedidoCriado);
