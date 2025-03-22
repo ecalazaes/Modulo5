@@ -63,20 +63,5 @@ public class PagamentoService {
                 .build();
 
         return pagamentoRepository.save(pagamento);
-
-//        // Enviar evento para RabbitMQ
-//        PagamentoDoacaoDTO pagamentoDoacaoDTO = PagamentoDoacaoDTO.builder()
-//                .nomeDoador(pagamento.getNomeDoador())
-//                .documento(pagamento.getDocumentoDoador())
-//                .valor(pagamento.getValor())
-//                .status(pagamento.getStatus())
-//                .doacao(pagamento.getDoacao())
-//                .dataCriacao(pagamento.getDataCriacao())
-//                .build();
-//
-//        pagamentoPublisher.enviarPagamentoDoacaoConcluido(pagamentoDoacaoDTO);
-//
-//        return pagamento;
     }
-
 }

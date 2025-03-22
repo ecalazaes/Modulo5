@@ -1,4 +1,26 @@
-- testar Doação em um pedido
+
+Microseriço de Comra
+- Criar banco de dados MySQL ms_compra ( Usuario: Root / Senha: Root )
+Tabelas:
+
+Entidade pedidos:
+- pedido_id int pk
+- pedido_data_criacao datetime
+- pedido_status varchar
+- pedido_valor_total int
+- pedido_usuario_id int
+
+Entidade pedido_item:
+- pedido_item_id long pk
+- pedido_item_doacao boolean
+- pedido_item_nome varchar
+- pedido_item_preco int
+- pedido_item_quantidade int
+- pedido_id fk pedidos
+
+- Rodar o arquivo MsCompraApplication
+- Para Testar Doação em um pedido swagger: http://localhost:8081/api
+- Json Body
 {
     "usuarioId": 1,
     "total": 50,
@@ -18,11 +40,33 @@
     ]
 }
 
-- Testar Doação Direta
+
+Microseriço de Comra
+- Criar banco de dados MySQL ms_pagamento ( Usuario: Root / Senha: Root )
+
+Entidade pagamentos:
+- pagamento_id int pk
+- pagamento_data_criacao datetime
+- pagamento_contem_doacao boolean
+- pagamento_documento_doador varchar
+- pagamento_nome_doador varchar
+- pagamento_pedido_id int ( Id vem do ms_compra via rabbitmq )
+- pagamento_status varchar
+- pagamento_usuario_id int
+- pagamento_valor int
+
+- Rodar o arquivo MsPagamentoApplication
+- Para Testar Doação direta no pagamento swagger: http://localhost:8082/api
+- Json Body
 {
   "nomeDoador": "Erick Calazães",
   "documentoDoador": "14019044759",
   "valor": 150
 }
 
+- Subir Rabbitmq no docker
 docker run -d --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:management
+
+
+- Criar banco de dados MySQL ms_pagamento
+

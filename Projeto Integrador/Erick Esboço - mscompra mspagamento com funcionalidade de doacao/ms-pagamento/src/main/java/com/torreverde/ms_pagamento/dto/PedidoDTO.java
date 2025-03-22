@@ -15,14 +15,6 @@ import java.util.List;
 @Builder
 public class PedidoDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-//    private Long id;
-//    private Long usuarioId;
-//    private Integer total;
-//    private String status;
-//    private LocalDateTime dataCriacao;
-
     private Long id;
     private Long usuarioId;
     private List<PedidoItemDTO> itensPedido;  // Lista de produtos e doações
