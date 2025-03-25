@@ -6,16 +6,12 @@ const app = express()
 // Indicar para o express usar o boby com json
 app.use(express.json());
 
-// function buscarAlunoPorId(id) {
-//     return list.filter((item) => item.id == id)
-// }
-
 // Criando uma rota padrão ou raiz.
 app.get('/', (req, res) => {
     res.status(200).send('Erick Calazães!')
 })
 
-// Buscar todos
+// Buscar todos alunos
 app.get('/listas', (req, res) => {
 
     const sql = 'SELECT * FROM dbsenac.alunos';
@@ -29,7 +25,7 @@ app.get('/listas', (req, res) => {
     })
 })
 
-// Buscar por Id
+// Buscar aluno por Id
 app.get('/listas/:id', (req, res) => {
 
     const id = req.params.id;
@@ -48,7 +44,7 @@ app.get('/listas/:id', (req, res) => {
     })
 })
 
-// Inserir
+// Inserir aluno
 app.post('/listas', (req, res) => {
 
     const aluno = req.body;
@@ -76,11 +72,38 @@ app.delete('/listas/:id', (req, res) => {
             if (result == "") {{
                 res.status(404).send('Aluno não encontrado');
             }} else {
-                res.status(200).json({ message: 'Aluno deletado com sucesso!'});
+                res.status(200).json({
+                    message: 'Aluno deletado com sucesso!',
+                    deletedId: id,
+                    affectedRows: result.affectedRows
+                });
             }
         }
     })
 })
+
+// Update aluno por id
+app.put('/listas/:id', (req, res) => {
+    const id = req.params.id;
+    const aluno = req.body;
+
+    const sql = 'UPDATE dbsenac.alunos SET ? WHERE aluno_id = ?;';
+
+    conexao.query(sql, [aluno, id], (error, result) => {
+        if (error) {
+            res.status(400).json({ error: 'Erro ao atualizar o aluno' });
+        } else {
+            if (result.affectedRows === 0) {
+                res.status(404).json({ message: 'Aluno não encontrado' });
+            } else {
+                res.status(200).json({
+                    message: 'Aluno atualizado com sucesso!',
+                    affectedRows: result.affectedRows
+                });
+            }
+        }
+    });
+});
 
 // Expor o objeto para outros módulos
 export default app
