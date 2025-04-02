@@ -1,5 +1,4 @@
 import express from 'express'
-import conexao from "./database/conexao.js";
 import AlunoController from "./controllers/AlunoController.js";
 
 const app = express()

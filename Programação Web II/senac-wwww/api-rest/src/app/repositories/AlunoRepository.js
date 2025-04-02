@@ -1,37 +1,40 @@
-import conexao from "../database/conexao.js";
-import res from "express/lib/response.js";
+import {consulta} from "../database/conexao.js";
 
 class AlunoRepository {
 
-    // Criar um novo elemento
-    create(){}
-
-    // Buscar tudo
-    findAll(){
-        const sql = 'SELECT * FROM dbsenac.alunos';
-
-        conexao.query(sql, (error, result) => {
-            if (error) {
-                return error;
-                // return res.status(404).json({
-                //     error: 'Erro ao buscar alunos'
-                // });
-            }
-            // res.status(200).send(result);
-            console.log(result);
-            return result;
-        });
+    //  Criar um aluno
+    create(aluno) {
+        const sql = 'INSERT INTO `dbsenac`.`alunos` SET ?;'
+        return consulta(sql, aluno, "Não foi possível cadastrar o aluno")
     }
 
-    // Buscar por id
-    findById(req,res){}
 
-    // Atualizar por id
-    update(req,res){}
+    // Buscar todos alunos
+    findAll() {
+        const sql = 'SELECT * FROM dbsenac.alunos';
+        return consulta(sql, "", "Não foi possível localizar o aluno")
+    }
 
-    // Deletar por id
-    delete(req,res){}
 
+    //  Buscar por id
+    findById(id) {
+        const sql = 'SELECT * FROM dbsenac.alunos WHERE aluno_id = ?;';
+        return consulta(sql, id, "Erro ao buscar o aluno");
+    }
+
+
+// Atualizar por id
+    update(aluno, id) {
+        const sql = 'UPDATE dbsenac.alunos SET ? WHERE aluno_id = ?;';
+        return consulta(sql, [aluno, id], "Erro ao atualizar o aluno");
+    }
+
+// Deletar por id
+    delete(id) {
+        const sql = 'DELETE FROM dbsenac.alunos WHERE aluno_id = ?;'
+        return consuta(sql, id, "Erro ao deletar o aluno");
+    }
 }
+
 
 export default new AlunoRepository();

@@ -1,4 +1,4 @@
-import app from "./src/app/app.js";
+import app from "./app/app.js";
 const port = 3000
 
 // Subindo servidor na porta 3000

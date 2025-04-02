@@ -1,112 +1,44 @@
-import conexao from "../database/conexao.js";
 import AlunoRepository from "../repositories/AlunoRepository.js";
 
 
 class AlunoController {
 
     // Listar tudo
-    index(req, res) {
-        const row = AlunoRepository.findAll();
-        res.json(row)
+    async index(req, res) {
+        //  findAll retorna uma promise e não temos como garantir o tempo de resposta
+        const row = await AlunoRepository.findAll();
+        res.status(200).json(row)
     }
 
     // Listar por id
-    show(req, res) {
-
+    async show(req, res) {
         const id = req.params.id;
-        const sql = 'SELECT * FROM dbsenac.alunos WHERE aluno_id = ?;'
-
-        conexao.query(sql, id, (error, result) => {
-            if (error) {
-                return res.status(400).json({
-                    error: 'Erro ao buscar alunos'
-                });
-            }
-
-            if (result == "") {
-                return res.status(404).json({
-                    message: `Aluno com id ${id} não encontrado`
-                });
-            }
-            res.status(200).send(result);
-        });
+        const row = await AlunoRepository.findById(id);
+        res.status(200).json(row)
     }
 
     // Criar dados
-    store(req, res) {
-
+    async store(req, res) {
         const aluno = req.body;
-        const sql = 'INSERT INTO `dbsenac`.`alunos` SET ?;'
+        const row = await AlunoRepository.create(aluno);
+        res.status(201).send(row);
 
-        conexao.query(sql, aluno, (error, result) => {
-            if (error) {
-                return res.status(400).json({
-                    error: 'Erro ao cadastrar o aluno'
-                });
-            }
-
-            if (result.affectedRows >= 1) {
-                return res.status(201).json({
-                    message: `Aluno cadastrado com sucesso!`
-                });
-            }
-        })
     }
 
     // Atualizar dados
-    update(req, res){
-
+    async update(req, res) {
         const id = req.params.id;
         const aluno = req.body;
-
-        const sql = 'UPDATE dbsenac.alunos SET ? WHERE aluno_id = ?;';
-
-        conexao.query(sql, [aluno, id], (error, result) => {
-            if (error) {
-                return res.status(400).json({
-                    error: 'Erro ao atualizar o aluno'
-                });
-            }
-
-            if (result.affectedRows === 0) {
-                return res.status(404).json({
-                    message: `Aluno com id ${id} não encontrado`
-                });
-            }
-
-            return res.status(200).json({
-                message: `Aluno com id ${id} atualizado com sucesso!`,
-                affectedRows: result.affectedRows
-            });
-
-        });
-
+        const row = await AlunoRepository.update(aluno, id);
+        res.status(200).send(row);
     }
 
     // Remover dados
-    delete(req, res){
-
+    async delete(req, res) {
         const id = req.params.id;
-        const sql = 'DELETE FROM dbsenac.alunos WHERE aluno_id = ?;'
+        const row = await AlunoRepository.delete(id);
+        res.status(200).send(row);
 
-        conexao.query(sql, id, (error, result) => {
-            if (error) {
-                return res.status(400).json({
-                    error: 'Erro ao deletar aluno'
-                });
-            }
-
-            if (result.affectedRows === 0) {
-                return res.status(404).json({
-                    message: `Aluno com id ${id} não encontrado`
-                });
-            }
-
-            res.status(200).json({
-                message: `Aluno com id ${id} deletado com sucesso!`,
-                affectedRows: result.affectedRows
-            })
-        });
     }
 }
 
