@@ -1,5 +1,6 @@
 import express from 'express'
 import AlunoController from "./controllers/AlunoController.js";
+import router from "../router.js";
 
 const app = express()
 
@@ -7,20 +8,6 @@ const app = express()
 app.use(express.json());
 
 // ROTAS //
-
-// Listas todos alunos
-app.get('/listas', AlunoController.index);
-
-// Buscar aluno por Id
-app.get('/listas/:id', AlunoController.show);
-
-// Inserir aluno
-app.post('/listas', AlunoController.store);
-
-// Deletar por id
-app.delete('/listas/:id', AlunoController.delete);
-
-// Update aluno por id
-app.put('/listas/:id', AlunoController.update);
+app.use('/alunos', router)
 
 export default app
