@@ -1,0 +1,34 @@
+{
+  "usuarioId": 123,
+  "cupom": {
+    "id": 2
+  },
+  "observacoes": "Pedido com doação",
+  "itens": [
+    {
+      "estoqueId": 1,
+      "quantidade": 2,
+      "precoUnitario": 100.0,
+      "doacao": {
+        "valor": 20.0
+      }
+    }
+  ]
+}
+
+
+{
+  "usuarioId": 123,
+  "cupom": {
+    "id": 2
+  },
+  "observacoes": "Pedido sem doação",
+  "itens": [
+    {
+      "estoqueId": 1,
+      "quantidade": 2,
+      "precoUnitario": 100.0     
+    }
+  ]
+}
+
