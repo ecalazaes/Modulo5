@@ -1,9 +1,41 @@
+Exemplo de JSON de pedido sem doação e sem desconto
+
+{
+  "usuarioId": 123,  
+  "observacoes": "Pedido sem doação e com desconto",
+  "itens": [
+    {
+      "estoqueId": 1,
+      "quantidade": 2,
+      "precoUnitario": 100.0     
+    }
+  ]
+}
+
+
+Exemplo de JSON de pedido sem doação e com desconto
+
 {
   "usuarioId": 123,
   "cupom": {
     "id": 2
   },
-  "observacoes": "Pedido com doação",
+  "observacoes": "Pedido sem doação e com desconto",
+  "itens": [
+    {
+      "estoqueId": 1,
+      "quantidade": 2,
+      "precoUnitario": 100.0     
+    }
+  ]
+}
+
+
+Exemplo de JSON de Pedido com doação e sem cupom de desconto.
+
+{
+  "usuarioId": 123,
+  "observacoes": "Pedido com doação e sem desconto",
   "itens": [
     {
       "estoqueId": 1,
@@ -13,21 +45,26 @@
         "valor": 20.0
       }
     }
-  ]
+  ]	  
 }
 
+
+Exemplo de JSON Pedido com doação e cupom de desconto.
 
 {
   "usuarioId": 123,
   "cupom": {
     "id": 2
   },
-  "observacoes": "Pedido sem doação",
+  "observacoes": "Pedido com doação e com desconto",
   "itens": [
     {
       "estoqueId": 1,
       "quantidade": 2,
-      "precoUnitario": 100.0     
+      "precoUnitario": 100.0,
+      "doacao": {
+        "valor": 20.0
+      }
     }
   ]
 }

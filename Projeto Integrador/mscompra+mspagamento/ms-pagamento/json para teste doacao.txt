@@ -1,0 +1,14 @@
+Exemplo de JSON para doação direto no pagamento
+
+{
+  "usuarioId": 123,
+  "detalhesDoacao": {
+    "valorDoacao": 50.00,
+    "doadorNome": "João da Silva",
+    "doadorIdentificacao": "123.456.789-00",
+    "doadorTipo": 1,
+    "doadorPaisOrigem": "Brasil",
+    "formaTransferencia": "Pix",
+    "idTransacao": "E123456789"
+  }
+}
