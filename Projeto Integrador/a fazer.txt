@@ -1,0 +1,11 @@
+Ms-compra tarefas:
+
+PedidoEntregador - criar lógica para atribuir entregador em caso de pedido processado com pagamento aprovado
+
+Refatorar - Tirar logica dos controllers o maximo possivel
+
+Refatorar - Exceções / try catchs
+
+Refatorar - Validações
+
+
